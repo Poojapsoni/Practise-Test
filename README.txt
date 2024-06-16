@@ -1,0 +1,1 @@
+Added three activity tabs just open the 

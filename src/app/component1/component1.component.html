@@ -1,0 +1,105 @@
+<router-outlet></router-outlet>
+
+<div class="container" [ngClass]="{ backdrop: modal === 'modal-open' }">
+  <!-- Button trigger modal -->
+  <button
+    type="button"
+    [ngClass]="{ my_class: modal === 'modal-open' }"
+    class="btn btn-primary open-button"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    (click)="openModal('custom-modal-1')"
+  >
+    New
+  </button>
+  <!-- Modal -->
+  <div
+    [ngClass]="{ my_class1: modal === 'modal-close' }"
+    class="modal fade form-popup"
+    id="exampleModal"
+    tabindex="-1"
+    aria-
+    labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"></div>
+        <div class="modal-body text-danger">
+          <form class="form-container">
+            <input
+              type="text"
+              placeholder="ID"
+              name="id"
+              [(ngModel)]="newBakedGood.id"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              [(ngModel)]="newBakedGood.name"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Type"
+              name="type"
+              [(ngModel)]="newBakedGood.type"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Topping"
+              name="topping"
+              [(ngModel)]="newBakedGood.topping"
+              required
+            />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-close"
+            data-bs-
+            dismiss="modal"
+            (click)="closeModal()"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-save" (click)="addBakedGood()">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div>
+  <input type="text" placeholder="Search here..." [(ngModel)]="searchText" />
+</div>
+ 
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="w-10" (click)="sortBy('id')">
+          ID {{ sortIcon('id') }}
+        </th>
+        <th scope="col" class="w-10">Name</th>
+        <th scope="col" class="w-30" (click)="sortBy('type')">
+          Type {{ sortIcon('type') }}
+        </th>
+        <th scope="col" class="w-10" (click)="sortBy('topping')">
+          Topping {{ sortIcon('topping') }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bakedGood of bakedGoods | filter : searchText">
+        <td class="col-md-3">{{ bakedGood.id }}</td>
+        <td class="col-md-3">{{ bakedGood.name }}</td>
+        <td class="col-md-3">{{ bakedGood.type }}</td>
+        <td class="col-md-3">{{ bakedGood.topping }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
